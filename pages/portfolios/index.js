@@ -1,11 +1,11 @@
 import axios from "axios";
 import PortfolioCard from "./PortfolioCard";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useLazyQuery, useMutation } from "@apollo/react-hooks";
+import React from "react";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_PORTFOLIOS, CREATE_PORTFOLIO } from "@/apollo/queries";
-import withApollo from '@/hoc/withApollo';
-import { getDataFromTree } from '@apollo/react-ssr';
+import withApollo from "@/hoc/withApollo";
+import { getDataFromTree } from "@apollo/react-ssr";
 
 const graphDeletePortfolio = (id) => {
   const query = `
@@ -51,8 +51,7 @@ const graphUpdatePortfolio = (id) => {
 };
 
 const Portfolios = () => {
-  const [portfolios, setPortfolios] = useState([]);
-  const [getPortfolios, { loading, data }] = useLazyQuery(GET_PORTFOLIOS);
+  const { data } = useQuery(GET_PORTFOLIOS);
 
   const [createPortfolio] = useMutation(CREATE_PORTFOLIO, {
     update(cache, { data: { createPortfolio } }) {
@@ -63,37 +62,16 @@ const Portfolios = () => {
       });
     },
   });
-  // const onPortfolioCreated = (dataC) => setPortfolios([...portfolios, dataC.createPortfolio])
-
-  // const [createPortfolio] = useMutation(CREATE_PORTFOLIO, {onCompleted: onPortfolioCreated});
-
-
-  useEffect(() => {
-    getPortfolios();
-  }, []);
-
-  if (data && data.portfolios.length > 0 && (portfolios.length === 0 || data.portfolios.length !== portfolios.length)) {
-    setPortfolios(data.portfolios);
-  }
-  if (loading) {
-    return "Loading...";
-  }
 
   const updatePortfolio = async (id) => {
-    const updatedPortfolio = await graphUpdatePortfolio(id);
-    const index = portfolios.findIndex((p) => p._id === id);
-    const newPortfolios = portfolios.slice();
-    newPortfolios[index] = updatedPortfolio;
-    setPortfolios(newPortfolios);
+    await graphUpdatePortfolio(id);
   };
 
   const deletePortfolio = async (id) => {
-    const deletedId = await graphDeletePortfolio(id);
-    const index = portfolios.findIndex((p) => p._id === deletedId);
-    const newPortfolios = portfolios.slice();
-    newPortfolios.splice(index, 1);
-    setPortfolios(newPortfolios);
+    await graphDeletePortfolio(id);
   };
+
+  const portfolios = (data && data.portfolios) || [];
 
   return (
     <>
