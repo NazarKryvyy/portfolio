@@ -3,73 +3,20 @@ import PortfolioCard from "./PortfolioCard";
 import Link from "next/link";
 import React from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { GET_PORTFOLIOS, CREATE_PORTFOLIO } from "@/apollo/queries";
+import {
+  useGetPortfolios,
+  useUpdatePortfolio,
+  useDeletePortfolio,
+  useCreatePortfolio,
+} from "@/apollo/actions";
 import withApollo from "@/hoc/withApollo";
 import { getDataFromTree } from "@apollo/react-ssr";
 
-const graphDeletePortfolio = (id) => {
-  const query = `
-    mutation DeletePortfolio {
-      deletePortfolio(id: "${id}")
-    }
-  `;
-
-  return axios
-    .post("http://localhost:4000/graphql", { query })
-    .then(({ data: graph }) => graph.data)
-    .then((data) => data.deletePortfolio);
-};
-
-const graphUpdatePortfolio = (id) => {
-  const query = `
-    mutation UpdatePortfolio {
-      updatePortfolio(id: "${id}",input: {
-        title: "UPDATE Job"
-        company: "UPDATE Company"
-        companyWebsite: "UPDATE Website"
-        location: "UPDATE Location"
-        jobTitle: "UPDATE Job Title"
-        description: "UPDATE Desc"
-        startDate: "12/12/2012 UPDATE"
-        endDate: "14/11/2013 UPDATE"
-      }) {
-        _id,
-        title,
-        company,
-        companyWebsite
-        location
-        jobTitle
-        description
-        startDate
-        endDate
-      }
-    }`;
-  return axios
-    .post("http://localhost:4000/graphql", { query })
-    .then(({ data: graph }) => graph.data)
-    .then((data) => data.updatePortfolio);
-};
-
 const Portfolios = () => {
-  const { data } = useQuery(GET_PORTFOLIOS);
-
-  const [createPortfolio] = useMutation(CREATE_PORTFOLIO, {
-    update(cache, { data: { createPortfolio } }) {
-      const { portfolios } = cache.readQuery({ query: GET_PORTFOLIOS });
-      cache.writeQuery({
-        query: GET_PORTFOLIOS,
-        data: { portfolios: [...portfolios, createPortfolio] },
-      });
-    },
-  });
-
-  const updatePortfolio = async (id) => {
-    await graphUpdatePortfolio(id);
-  };
-
-  const deletePortfolio = async (id) => {
-    await graphDeletePortfolio(id);
-  };
+  const { data } = useGetPortfolios();
+  const [updatePortfolio] = useUpdatePortfolio();
+  const [deletePortfolio] = useDeletePortfolio();
+  const [createPortfolio] = useCreatePortfolio();
 
   const portfolios = (data && data.portfolios) || [];
 
@@ -97,12 +44,16 @@ const Portfolios = () => {
               </Link>
               <button
                 className="btn btn-warning"
-                onClick={() => updatePortfolio(portfolio._id)}
+                onClick={() =>
+                  updatePortfolio({ variables: { id: portfolio._id } })
+                }
               >
                 Update Portfolio
               </button>
               <button
-                onClick={() => deletePortfolio(portfolio._id)}
+                onClick={() =>
+                  deletePortfolio({ variables: { id: portfolio._id } })
+                }
                 className="btn btn-danger"
               >
                 Delete Portfolio
