@@ -7,7 +7,7 @@ const portfolioFields = `
   description: String,
   startDate: String,
   endDate: String
-`
+`;
 
 exports.portfolioTypes = `
   type Portfolio {
@@ -18,4 +18,15 @@ exports.portfolioTypes = `
    input PortfolioInput {
     ${portfolioFields}
   }
-`
+`;
+
+exports.userTypes = `
+  input SignUpInput {
+    avatar: String
+    username: String!
+    name: String
+    email: String!
+    password: String!
+    passwordConfirmation: String!
+  }
+`;

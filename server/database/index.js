@@ -8,9 +8,14 @@ exports.connect = () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
+      useCreateIndex: true,
     },
-    () => {
-      console.log("Connected to DB");
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Connected to DB");
+      }
     }
   );
 };
