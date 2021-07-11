@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("../config/dev");
-const fakeDb = require("./FakeDb");
+const fakeDb = require("./fakeDB");
 
 console.log(fakeDb);
 mongoose.connect(
@@ -8,6 +8,8 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
   },
   async () => {
     console.log("Starting populating DB...");

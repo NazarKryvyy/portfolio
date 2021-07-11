@@ -5,18 +5,24 @@ class User {
 
   signUp(signUpData) {
     if (signUpData.password !== signUpData.passwordConfirmation) {
-      throw new Error('Password must be the same as confirmation password!');
+      throw new Error("Password must be the same as confirmation password!");
     }
 
     return this.Model.create(signUpData);
   }
 
-  signIn() {
-    return 'Signing In...';
+  signIn(signInData, ctx) {
+    const isAuthenticated = ctx.authenticate(signInData);
+
+    if (isAuthenticated) {
+      console.log("User is Authenticated!");
+    }
+
+    return `Sign In Output!`;
   }
 
   signOut() {
-    return 'Signing Out...';
+    return "Signing Out...";
   }
 }
 module.exports = User;

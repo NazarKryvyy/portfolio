@@ -29,14 +29,14 @@ exports.portfolioMutations = {
 };
 
 exports.userMutations = {
-  signIn: (root, args, ctx) => {
-    return ctx.models.User.signIn();
+  signUp: async (root, { input }, ctx) => {
+    const registeredUser = await ctx.models.User.signUp(input);
+    return registeredUser._id;
   },
-  signUp: (root, args, ctx) => {
-    return ctx.models.User.signUp();
+  signIn: (root, { input }, ctx) => {
+    return ctx.models.User.signIn(input, ctx);
   },
   signOut: (root, args, ctx) => {
     return ctx.models.User.signOut();
-  }
-}
-
+  },
+};

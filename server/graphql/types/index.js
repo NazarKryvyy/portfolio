@@ -29,4 +29,8 @@ exports.userTypes = `
     password: String!
     passwordConfirmation: String!
   }
+   input SignInInput {
+    email: String!
+    password: String!
+  }
 `;

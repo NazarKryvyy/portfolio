@@ -12,6 +12,7 @@ const { portfolioTypes, userTypes } = require("./types");
 // GraphqlModels
 const Portfolio = require("./models/portfolio");
 const User = require("./models/user");
+const { buildAuthContext } = require("./context");
 
 exports.createApolloServer = () => {
   const typeDefs = gql(`
@@ -21,6 +22,7 @@ exports.createApolloServer = () => {
     type Query {
       portfolio(id: ID): Portfolio
       portfolios: [Portfolio]
+      
     }
     
      type Mutation {  
@@ -28,8 +30,8 @@ exports.createApolloServer = () => {
       updatePortfolio(id: ID, input: PortfolioInput, ): Portfolio
       deletePortfolio(id: ID): ID
       
-      signIn: String
-      signUp: String
+      signIn(input: SignInInput): String
+      signUp(input: SignUpInput): String
       signOut: String
     }     
    `);
@@ -49,6 +51,7 @@ exports.createApolloServer = () => {
     typeDefs,
     resolvers,
     context: () => ({
+      ...buildAuthContext(),
       models: {
         Portfolio: new Portfolio(mongoose.model("Portfolio")),
         User: new User(mongoose.model("User")),
