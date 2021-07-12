@@ -30,7 +30,7 @@ exports.createApolloServer = () => {
       updatePortfolio(id: ID, input: PortfolioInput, ): Portfolio
       deletePortfolio(id: ID): ID
       
-      signIn(input: SignInInput): String
+      signIn(input: SignInInput): User
       signUp(input: SignUpInput): String
       signOut: String
     }     
