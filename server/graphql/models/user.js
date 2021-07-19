@@ -20,8 +20,20 @@ class User {
     }
   }
 
-  signOut() {
-    return "Signing Out...";
+  signOut(ctx) {
+    try {
+      console.log("BEFORE LOGOUT-------------");
+      console.log("is authenticated", ctx.isAuthenticated());
+      console.log("user", ctx.getUser());
+      ctx.logout();
+      console.log("AFTER LOGOUT-------------");
+      console.log("is authenticated", ctx.isAuthenticated());
+      console.log("user", ctx.getUser());
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
   }
 }
 module.exports = User;

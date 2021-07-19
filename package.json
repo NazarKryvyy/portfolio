@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon --watch server server/index.js",
-    "dev": "next dev -p 4000",
+    "dev": "nodemon --watch server server/index.js",
+    "server": "next dev -p 4000",
     "build": "next build",
     "start": "next start",
     "populateDb": "node ./server/fakeDB/populate.js"
