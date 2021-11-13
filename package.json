@@ -37,6 +37,7 @@
     "react": "^17.0.2",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.19.5",
     "react-ssr": "^2.0.0-beta.10",
     "sass": "^1.32.13"
   },
