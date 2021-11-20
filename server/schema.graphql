@@ -1,0 +1,75 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    createPortfolio(input: PortfolioInput): Portfolio
+    deletePortfolio(id: ID): ID
+    signIn(input: SignInInput): User
+    signOut: Boolean
+    signUp(input: SignUpInput): String
+    updatePortfolio(id: ID, input: PortfolioInput): Portfolio
+}
+
+type Portfolio {
+    _id: ID
+    company: String
+    companyWebsite: String
+    description: String
+    endDate: String
+    jobTitle: String
+    location: String
+    startDate: String
+    title: String
+}
+
+type Query {
+    portfolio(id: ID): Portfolio
+    portfolios: [Portfolio]
+}
+
+type User {
+    _id: ID
+    avatar: String
+    email: String
+    name: String
+    role: String
+    username: String
+}
+
+enum CacheControlScope {
+    PRIVATE
+    PUBLIC
+}
+
+input PortfolioInput {
+    company: String
+    companyWebsite: String
+    description: String
+    endDate: String
+    jobTitle: String
+    location: String
+    startDate: String
+    title: String
+}
+
+input SignInInput {
+    email: String!
+    password: String!
+}
+
+input SignUpInput {
+    avatar: String
+    email: String!
+    name: String
+    password: String!
+    passwordConfirmation: String!
+    username: String!
+}
+
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
