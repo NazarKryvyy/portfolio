@@ -1,8 +1,8 @@
 import React from "react";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "@/apollo/queries";
 import withApollo from "@/hoc/withApollo";
-import { getDataFromTree } from "@apollo/react-ssr";
+import { getDataFromTree } from "@apollo/client/react/ssr";
 
 const PortfolioDetail = ({ query }) => {
   const { data } = useQuery(GET_PORTFOLIO, { variables: { id: query.id } });

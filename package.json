@@ -14,9 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/react-hooks": "^4.0.0",
-    "@apollo/react-ssr": "^4.0.0",
-    "apollo-boost": "^0.4.9",
+    "@apollo/client": "^3.4.17",
     "apollo-server-express": "^2.25.1",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
@@ -38,7 +36,6 @@
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.19.5",
-    "react-ssr": "^2.0.0-beta.10",
     "sass": "^1.32.13"
   },
   "devDependencies": {

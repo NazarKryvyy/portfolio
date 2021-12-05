@@ -2,7 +2,7 @@ import axios from "axios";
 import PortfolioCard from "./PortfolioCard";
 import Link from "next/link";
 import React from "react";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/client";
 import {
   useGetPortfolios,
   useUpdatePortfolio,
@@ -10,7 +10,7 @@ import {
   useCreatePortfolio,
 } from "@/apollo/actions";
 import withApollo from "@/hoc/withApollo";
-import { getDataFromTree } from "@apollo/react-ssr";
+import { getDataFromTree } from "@apollo/client/react/ssr";
 
 const Portfolios = () => {
   const { data } = useGetPortfolios();

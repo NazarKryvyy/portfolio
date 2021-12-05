@@ -32,14 +32,9 @@ const AppNavBar = () => {
             <AppLink href="/login" className="mr-3 nav-link">
               Sign Up
             </AppLink>
-            <li className="nav-item mr-3">
-              <a
-                className="nav-link btn btn-success bg-green-2 bright"
-                href="#"
-              >
-                Sign In
-              </a>
-            </li>
+            <AppLink href="/register" className="mr-3 nav-link">
+              Register
+            </AppLink>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
