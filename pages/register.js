@@ -5,6 +5,12 @@ import withApollo from "@/hoc/withApollo";
 import Redirect from "@/components/shared/Redirect";
 
 const Register = () => {
+  const errorMessage = (error) => {
+    return (
+      (error.graphQLErrors && error.graphQLErrors[0].message) ||
+      "Ooooops something went wrong..."
+    );
+  };
   return (
     <>
       <div className="bwm-form mt-5">
@@ -20,6 +26,11 @@ const Register = () => {
                     }}
                   />
                   {data && data.signUp && <Redirect to="/login" />}
+                  {error && (
+                    <div className="alert alert-danger">
+                      {errorMessage(error)}
+                    </div>
+                  )}
                 </>
               )}
             </Mutation>
