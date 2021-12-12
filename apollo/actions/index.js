@@ -6,6 +6,7 @@ import {
   DELETE_PORTFOLIO,
   SIGN_IN,
   GET_USER,
+  SIGN_OUT,
 } from "@/apollo/queries";
 
 export const useGetPortfolios = () => useQuery(GET_PORTFOLIOS);
@@ -43,6 +44,7 @@ export const useSignIn = () =>
       });
     },
   });
+export const useSignOut = () => useMutation(SIGN_OUT);
 export const useLazyGetUser = () => useLazyQuery(GET_USER);
 
 // Auth actions end -----------------------

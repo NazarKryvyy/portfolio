@@ -4,7 +4,7 @@ import Redirect from "@/components/shared/Redirect";
 import withApollo from "@/hoc/withApollo";
 
 const Login = () => {
-  const [signIn, { data, error }] = useSignIn();
+  const [signIn, { data, loading, error }] = useSignIn();
   const errorMessage = (error) => {
     return (
       (error.graphQLErrors && error.graphQLErrors[0].message) ||
@@ -18,6 +18,7 @@ const Login = () => {
           <div className="col-md-5 mx-auto">
             <h1 className="page-title">Login</h1>
             <LoginForm
+              loading={loading}
               onSubmit={(signInData) => signIn({ variables: signInData })}
             />
             {data && data.signIn && <Redirect to="/" />}
