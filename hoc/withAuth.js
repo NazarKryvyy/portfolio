@@ -1,7 +1,7 @@
 import { useGetUser } from "@/apollo/actions";
 import Redirect from "@/components/shared/Redirect";
 
-export default (WrappedComponent) => (props) => {
+export default (WrappedComponent, role) => (props) => {
   const {
     data: { user } = {},
     loading,
@@ -14,6 +14,9 @@ export default (WrappedComponent) => (props) => {
 
   // TODO: Check for role
   if (user) {
+    if (role && user.role !== role) {
+      return <Redirect to="/login" />;
+    }
     return <WrappedComponent {...props} />;
   }
 
