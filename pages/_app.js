@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 import AppNavBar from "components/shared/NavBar";
 import Hero from "../components/shared/Hero";
