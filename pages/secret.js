@@ -16,4 +16,4 @@ const Secret = withAuth(() => {
   );
 }, "instructor");
 
-export default withApollo(Secret);
+export default withApollo(Secret, ["instructor"]);
