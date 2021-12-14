@@ -3,20 +3,12 @@ import PortfolioCard from "./PortfolioCard";
 import Link from "next/link";
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import {
-  useGetPortfolios,
-  useUpdatePortfolio,
-  useDeletePortfolio,
-  useCreatePortfolio,
-} from "@/apollo/actions";
+import { useGetPortfolios } from "@/apollo/actions";
 import withApollo from "@/hoc/withApollo";
 import { getDataFromTree } from "@apollo/client/react/ssr";
 
 const Portfolios = () => {
   const { data } = useGetPortfolios();
-  const [updatePortfolio] = useUpdatePortfolio();
-  const [deletePortfolio] = useDeletePortfolio();
-  const [createPortfolio] = useCreatePortfolio();
 
   const portfolios = (data && data.portfolios) || [];
 
@@ -42,22 +34,6 @@ const Portfolios = () => {
                   <PortfolioCard portfolio={portfolio} />
                 </a>
               </Link>
-              <button
-                className="btn btn-warning"
-                onClick={() =>
-                  updatePortfolio({ variables: { id: portfolio._id } })
-                }
-              >
-                Update Portfolio
-              </button>
-              <button
-                onClick={() =>
-                  deletePortfolio({ variables: { id: portfolio._id } })
-                }
-                className="btn btn-danger"
-              >
-                Delete Portfolio
-              </button>
             </div>
           ))}
         </div>
