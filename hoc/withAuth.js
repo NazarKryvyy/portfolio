@@ -1,5 +1,5 @@
-import { useGetUser } from "@/apollo/actions";
-import Redirect from "@/components/shared/Redirect";
+import { useGetUser } from "apollo/actions";
+import Redirect from "components/shared/Redirect";
 
 export default (WrappedComponent, role) => (props) => {
   const {

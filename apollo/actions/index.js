@@ -7,7 +7,7 @@ import {
   SIGN_IN,
   GET_USER,
   SIGN_OUT,
-} from "@/apollo/queries";
+} from "apollo/queries";
 
 export const useGetPortfolios = () => useQuery(GET_PORTFOLIOS);
 export const useUpdatePortfolio = () => useMutation(UPDATE_PORTFOLIO);

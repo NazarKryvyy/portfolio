@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, NavDropdown, Nav } from "react-bootstrap";
 import Link from "next/link";
-import withApollo from "@/hoc/withApollo";
-import { useLazyGetUser } from "@/apollo/actions";
+import withApollo from "hoc/withApollo";
+import { useLazyGetUser } from "apollo/actions";
 
 const AppLink = ({ children, className, href }) => (
   <Link href={href}>
