@@ -22,14 +22,28 @@ export const useDeletePortfolio = () =>
       });
     },
   });
+
 export const useCreatePortfolio = () =>
   useMutation(CREATE_PORTFOLIO, {
     update(cache, { data: { createPortfolio } }) {
-      const { portfolios } = cache.readQuery({ query: GET_PORTFOLIOS });
-      cache.writeQuery({
-        query: GET_PORTFOLIOS,
-        data: { portfolios: [...portfolios, createPortfolio] },
-      });
+      try {
+        const data = cache.readQuery({ query: GET_PORTFOLIOS });
+
+        if (data) {
+          const { portfolios } = data;
+          cache.writeQuery({
+            query: GET_PORTFOLIOS,
+            data: { portfolios: [...portfolios, createPortfolio] },
+          });
+        } else {
+          cache.writeQuery({
+            query: GET_PORTFOLIOS,
+            data: { portfolios: [createPortfolio] },
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
     },
   });
 

@@ -10,9 +10,9 @@ const PortfolioNew = () => {
   const router = useRouter();
 
   const errorMessage = (error) => {
+    console.log(error);
     return (
-      (error.graphQLErrors && error.graphQLErrors[0].message) ||
-      "Ooooops something went wrong..."
+      error?.graphQLErrors[0]?.message || "Ooooops something went wrong..."
     );
   };
 
