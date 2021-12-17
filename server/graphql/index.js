@@ -24,6 +24,7 @@ exports.createApolloServer = () => {
       portfolio(id: ID): Portfolio
       portfolios: [Portfolio]
       user: User
+      userPortfolios: [Portfolio]
       
     }
     
