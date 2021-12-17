@@ -30,6 +30,7 @@ type Query {
     portfolio(id: ID): Portfolio
     portfolios: [Portfolio]
     user: User
+    userPortfolios: [Portfolio]
 }
 
 type User {
