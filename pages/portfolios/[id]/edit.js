@@ -3,12 +3,25 @@ import withApollo from "hoc/withApollo";
 import withAuth from "hoc/withAuth";
 import BaseLayout from "layouts/BaseLayout";
 import { useRouter } from "next/router";
-import { useGetPortfolio } from "../../../apollo/actions";
+import { useGetPortfolio, useUpdatePortfolio } from "apollo/actions";
 
 const PortfolioEdit = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data } = useGetPortfolio({ variables: { id } });
+  const [updatePortfolio, { error }] = useUpdatePortfolio();
+
+  const errorMessage = (error) => {
+    return (
+      (error.graphQLErrors && error.graphQLErrors[0].message) ||
+      "Ooooops something went wrong..."
+    );
+  };
+
+  const handleUpdatePortfolio = async (data) => {
+    await updatePortfolio({ variables: { id, ...data } });
+    router.push(`/portfolios/${id}/`);
+  };
   return (
     <BaseLayout>
       <div className="bwm-form mt-5">
@@ -16,7 +29,13 @@ const PortfolioEdit = () => {
           <div className="col-md-5 mx-auto">
             <h1 className="page-title">Edit Portfolio</h1>
             {data && (
-              <PortfolioForm initialData={data.portfolio} onSubmit={() => {}} />
+              <PortfolioForm
+                initialData={data.portfolio}
+                onSubmit={handleUpdatePortfolio}
+              />
+            )}
+            {error && (
+              <div className="alert alert-danger">{errorMessage(error)}</div>
             )}
           </div>
         </div>
