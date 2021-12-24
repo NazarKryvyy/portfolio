@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_PORTFOLIO } from "apollo/queries";
 import withApollo from "hoc/withApollo";
