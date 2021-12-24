@@ -26,6 +26,7 @@
     "express-session": "^1.17.2",
     "graphql": "^15.5.0",
     "isomorphic-unfetch": "^3.1.0",
+    "moment": "^2.29.1",
     "mongoose": "^5.12.14",
     "next": "^10.2.0",
     "next-with-apollo": "^5.1.1",
