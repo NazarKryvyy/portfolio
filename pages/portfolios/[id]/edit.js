@@ -1,7 +1,7 @@
-import PortfolioForm from "@/components/forms/PortfolioForm";
-import withApollo from "@/hoc/withApollo";
-import withAuth from "@/hoc/withAuth";
-import BaseLayout from "@/layouts/BaseLayout";
+import PortfolioForm from "components/forms/PortfolioForm";
+import withApollo from "hoc/withApollo";
+import withAuth from "hoc/withAuth";
+import BaseLayout from "layouts/BaseLayout";
 
 const PortfolioEdit = () => {
   return (
