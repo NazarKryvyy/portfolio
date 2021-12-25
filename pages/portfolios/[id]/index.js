@@ -36,9 +36,8 @@ const PortfolioDetail = ({ query }) => {
             </div>
 
             <div className="col-lg-6">
-              {/* TODO: days later... */}
               <h4 className="title">Days</h4>
-              <p className="text">44</p>
+              <p className="text">{portfolio.daysOfExperience}</p>
 
               <h4 className="title">End Date</h4>
               <p className="text">{formatDate(portfolio.endDate)}</p>
