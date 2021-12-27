@@ -1,19 +1,20 @@
 import withApollo from "next-with-apollo";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+} from "@apollo/client";
 import { getDaysOfExperience } from "../utils/getDaysOfExperience";
 
 export default withApollo(
   ({ initialState, headers }) => {
     return new ApolloClient({
-      request: (operation) => {
-        operation.setContext({
-          fetchOptions: {
-            credentials: "include",
-          },
-          headers,
-        });
-      },
-      uri: "http://localhost:4000/graphql",
+      link: new HttpLink({
+        uri: "/graphql",
+        credentials: "include",
+        headers,
+      }),
       cache: new InMemoryCache({
         typePolicies: {
           Portfolio: {
