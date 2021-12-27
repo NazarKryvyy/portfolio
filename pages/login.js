@@ -5,17 +5,37 @@ import withApollo from "hoc/withApollo";
 import BaseLayout from "../layouts/BaseLayout";
 import { useRouter } from "next/router";
 import messages from "variables/messages";
+import { useEffect, useRef } from "react";
 
 const Login = () => {
+  const disposeId = useRef(null);
   const router = useRouter();
   const { message } = router.query;
   const [signIn, { data, loading, error }] = useSignIn();
+
   const errorMessage = (error) => {
     return (
       (error.graphQLErrors && error.graphQLErrors[0].message) ||
       "Ooooops something went wrong..."
     );
   };
+
+  const disposeMessage = () => {
+    router.replace("/login", "/login", { shallow: true });
+  };
+
+  useEffect(() => {
+    if (message) {
+      disposeId.current = setTimeout(() => {
+        disposeMessage();
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(disposeId.current);
+    };
+  }, [message]);
+
   return (
     <BaseLayout>
       <div className="bwm-form mt-5">
