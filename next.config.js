@@ -10,6 +10,7 @@ const moduleAliases = [
   "server",
   "style",
   "utils",
+  "variables",
 ].reduce((accumulator, alias) => {
   console.log(path.join(__dirname, `/${alias}`));
   accumulator[alias] = path.join(__dirname, `/${alias}`);

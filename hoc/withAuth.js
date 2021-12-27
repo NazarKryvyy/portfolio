@@ -1,7 +1,7 @@
 import { useGetUser } from "apollo/actions";
 import Redirect from "components/shared/Redirect";
 
-export default (WrappedComponent, role, options = { ssr: false }) => {
+const withAuth = (WrappedComponent, role, options = { ssr: false }) => {
   function WithAuth(props) {
     const {
       data: { user } = {},
@@ -10,13 +10,13 @@ export default (WrappedComponent, role, options = { ssr: false }) => {
     } = useGetUser({ fetchPolicy: "network-only" });
 
     if (!loading && (!user || error) && typeof window !== "undefined") {
-      return <Redirect to="/login" />;
+      return <Redirect to="/login" query={{ message: "NOT_AUTHENTICATED" }} />;
     }
 
     // TODO: Send a message to login page
     if (user) {
       if (role && !role.includes(user.role)) {
-        return <Redirect to="/login" />;
+        return <Redirect to="/login" query={{ message: "NOT_AUTHORIZED" }} />;
       }
       return <WrappedComponent {...props} />;
     }
@@ -24,14 +24,23 @@ export default (WrappedComponent, role, options = { ssr: false }) => {
     return <p>Loading...</p>;
   }
 
+  const serverRedirect = (res, to) => {
+    res.redirect(to);
+    res.end();
+    return {};
+  };
+
   if (options.ssr) {
     WithAuth.getInitialProps = async (context) => {
       const { req, res } = context;
       if (req) {
         const { user } = req;
-        if (!user || (role && !role.includes(user.role))) {
-          res.redirect("/login");
-          res.end();
+        if (!user) {
+          return serverRedirect(res, "/login?message=NOT_AUTHENTICATED");
+        }
+
+        if (role && !role.includes(user.role)) {
+          return serverRedirect(res, "/login?message=NOT_AUTHORIZED");
         }
       }
     };
@@ -39,3 +48,5 @@ export default (WrappedComponent, role, options = { ssr: false }) => {
 
   return WithAuth;
 };
+
+export default withAuth;
