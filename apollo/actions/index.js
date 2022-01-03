@@ -7,8 +7,9 @@ import {
   UPDATE_PORTFOLIO,
   DELETE_PORTFOLIO,
   SIGN_IN,
-  GET_USER,
   SIGN_OUT,
+  GET_USER,
+  FORUM_CATEGORIES,
 } from "apollo/queries";
 
 export const useGetPortfolios = () => useQuery(GET_PORTFOLIOS);
@@ -62,3 +63,8 @@ export const useLazyGetUser = () => useLazyQuery(GET_USER);
 export const useGetUser = () => useQuery(GET_USER);
 
 // Auth actions end -----------------------
+
+// Forum actions Start -----------------------
+export const useGetForumCategories = () => useQuery(FORUM_CATEGORIES);
+
+// Forum actions End -----------------------
