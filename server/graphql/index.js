@@ -7,25 +7,31 @@ const {
   portfolioMutations,
   userMutations,
   userQueries,
+  forumQueries,
 } = require("./resolvers");
+
 // types
-const { portfolioTypes, userTypes } = require("./types");
+const { portfolioTypes, userTypes, forumTypes } = require("./types");
+
 // GraphqlModels
 const Portfolio = require("./models/portfolio");
 const User = require("./models/user");
+const ForumCategory = require("./models/forumCategory");
+
 const { buildAuthContext } = require("./context");
 
 exports.createApolloServer = () => {
   const typeDefs = gql(`
     ${portfolioTypes}
     ${userTypes}
+    ${forumTypes}
     
     type Query {
       portfolio(id: ID): Portfolio
       portfolios: [Portfolio]
       user: User
       userPortfolios: [Portfolio]
-      
+      forumCategories: [ForumCategory]
     }
     
      type Mutation {  
@@ -44,6 +50,7 @@ exports.createApolloServer = () => {
     Query: {
       ...portfolioQueries,
       ...userQueries,
+      ...forumQueries,
     },
     Mutation: {
       ...portfolioMutations,
@@ -59,6 +66,7 @@ exports.createApolloServer = () => {
       models: {
         Portfolio: new Portfolio(mongoose.model("Portfolio"), req.user),
         User: new User(mongoose.model("User")),
+        ForumCategory: new ForumCategory(mongoose.model("ForumCategory")),
       },
     }),
   });
