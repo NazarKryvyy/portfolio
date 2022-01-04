@@ -1,3 +1,5 @@
+const slugify = require("slugify");
+
 class Topic {
   constructor(model, user) {
     this.Model = model;
@@ -17,7 +19,10 @@ class Topic {
 
     topicData.user = this.user;
     // generateSlug
-    topicData.slug = "doesnt-matter";
+    topicData.slug = slugify(topicData.title, {
+      replacement: "-",
+      lower: true,
+    });
 
     const createdTopic = await this.Model.create(topicData);
     return this.Model.findById(createdTopic._id)
