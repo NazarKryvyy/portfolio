@@ -5,8 +5,21 @@ schema {
     mutation: Mutation
 }
 
+type Author {
+    avatar: String
+    username: String
+}
+
+type ForumCategory {
+    _id: ID
+    slug: String
+    subTitle: String
+    title: String
+}
+
 type Mutation {
     createPortfolio(input: PortfolioInput): Portfolio
+    createTopic(input: TopicInput): Topic
     deletePortfolio(id: ID): ID
     signIn(input: SignInInput): User
     signOut: Boolean
@@ -27,10 +40,22 @@ type Portfolio {
 }
 
 type Query {
+    forumCategories: [ForumCategory]
     portfolio(id: ID): Portfolio
     portfolios: [Portfolio]
+    topicsByCategory(category: String): [Topic]
     user: User
     userPortfolios: [Portfolio]
+}
+
+type Topic {
+    _id: ID
+    content: String
+    createdAt: String
+    forumCategory: ForumCategory
+    slug: String
+    title: String
+    user: Author
 }
 
 type User {
@@ -70,6 +95,12 @@ input SignUpInput {
     password: String!
     passwordConfirmation: String!
     username: String!
+}
+
+input TopicInput {
+    content: String
+    forumCategory: String
+    title: String
 }
 
 
