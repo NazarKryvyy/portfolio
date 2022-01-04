@@ -55,7 +55,7 @@ const Replier = ({
               onClick={() => {
                 onSubmit(reply, resetReplier);
               }}
-              className="btn btn-main bg-blue py-2 ttu"
+              className="btn-main bg-blue py-2 ttu"
             >
               Reply
             </button>
