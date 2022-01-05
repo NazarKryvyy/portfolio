@@ -248,11 +248,30 @@ const postResponse = `
       avatar
     }
   }
+  topic {
+    slug
+  }
 `;
 
 export const POSTS_BY_TOPIC = gql`
   query PostsByTopic($slug: String) {
     postsByTopic(slug: $slug) {
+      ${postResponse}
+    }
+  }
+`;
+
+export const CREATE_POST = gql`
+  mutation CreatePost(
+    $content: String
+    $topic: String
+    $parent: String
+  ) {
+    createPost(input: {
+      content: $content
+      topic: $topic
+      parent: $parent
+    }) {
       ${postResponse}
     }
   }

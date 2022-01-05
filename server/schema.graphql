@@ -19,6 +19,7 @@ type ForumCategory {
 
 type Mutation {
     createPortfolio(input: PortfolioInput): Portfolio
+    createPost(input: PostInput): Post
     createTopic(input: TopicInput): Topic
     deletePortfolio(id: ID): ID
     signIn(input: SignInInput): User
@@ -39,10 +40,23 @@ type Portfolio {
     title: String
 }
 
+type Post {
+    _id: ID
+    content: String
+    createdAt: String
+    fullSlug: String
+    parent: Post
+    slug: String
+    topic: Topic
+    user: User
+}
+
 type Query {
     forumCategories: [ForumCategory]
     portfolio(id: ID): Portfolio
     portfolios: [Portfolio]
+    postsByTopic(slug: String): [Post]
+    topicBySlug(slug: String): Topic
     topicsByCategory(category: String): [Topic]
     user: User
     userPortfolios: [Portfolio]
@@ -81,6 +95,12 @@ input PortfolioInput {
     location: String
     startDate: String
     title: String
+}
+
+input PostInput {
+    content: String
+    parent: String
+    topic: String
 }
 
 input SignInInput {
