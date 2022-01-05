@@ -19,6 +19,7 @@ const Portfolio = require("./models/portfolio");
 const User = require("./models/user");
 const ForumCategory = require("./models/forumCategory");
 const Topics = require("./models/topics");
+const Post = require("./models/post");
 
 const { buildAuthContext } = require("./context");
 
@@ -31,11 +32,14 @@ exports.createApolloServer = () => {
     type Query {
       portfolio(id: ID): Portfolio
       portfolios: [Portfolio]
+      
       user: User
       userPortfolios: [Portfolio]
+      
       forumCategories: [ForumCategory]
       topicsByCategory(category: String): [Topic]
       topicBySlug(slug: String): Topic
+      postsByTopic(slug: String): [Post]
     }
     
      type Mutation {  
@@ -74,6 +78,7 @@ exports.createApolloServer = () => {
         User: new User(mongoose.model("User")),
         ForumCategory: new ForumCategory(mongoose.model("ForumCategory")),
         Topic: new Topics(mongoose.model("Topic"), req.user),
+        Post: new Post(mongoose.model("Post"), req.user),
       },
     }),
   });
