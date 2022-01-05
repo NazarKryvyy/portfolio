@@ -6,6 +6,7 @@ const Replier = ({
   closeBtn: CloseBtn,
   onSubmit,
   replyTo,
+  hasTitle = true,
 }) => {
   const [reply, setReply] = useState({ title: "", content: "" });
 
@@ -25,15 +26,17 @@ const Replier = ({
             Reply To: <span className="text ml-2">User1</span>
           </div>
         )}
-        <div className="fj-editor-input">
-          <input
-            name="title"
-            placeholder="Topic title"
-            type="text"
-            value={reply.title}
-            onChange={handleChange}
-          />
-        </div>
+        {hasTitle && (
+          <div className="fj-editor-input">
+            <input
+              value={reply.title}
+              onChange={handleChange}
+              name="title"
+              placeholder="Topic title"
+              type="text"
+            />
+          </div>
+        )}
         <div className="fj-editor">
           <div className="fj-editor-textarea-wrapper">
             <textarea
