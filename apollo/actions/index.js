@@ -100,27 +100,29 @@ export const useCreateTopic = () =>
 export const useGetPostsByTopic = (options) =>
   useQuery(POSTS_BY_TOPIC, options);
 
-export const useCreatePost = () =>
-  useMutation(CREATE_POST, {
-    update(cache, { data: { createPost } }) {
-      try {
-        const { postsByTopic } = cache.readQuery({
-          query: POSTS_BY_TOPIC,
-          variables: {
-            slug: createPost.topic.slug,
-          },
-        });
-        cache.writeQuery({
-          query: POSTS_BY_TOPIC,
-          data: { postsByTopic: [...postsByTopic, createPost] },
-          variables: {
-            slug: createPost.topic.slug,
-          },
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    },
-  });
+// export const useCreatePost = () =>
+//   useMutation(CREATE_POST, {
+//     update(cache, { data: { createPost } }) {
+//       try {
+//         const { postsByTopic } = cache.readQuery({
+//           query: POSTS_BY_TOPIC,
+//           variables: {
+//             slug: createPost.topic.slug,
+//           },
+//         });
+//         cache.writeQuery({
+//           query: POSTS_BY_TOPIC,
+//           data: { postsByTopic: [...postsByTopic, createPost] },
+//           variables: {
+//             slug: createPost.topic.slug,
+//           },
+//         });
+//       } catch (e) {
+//         console.log(e);
+//       }
+//     },
+//   });
+
+export const useCreatePost = () => useMutation(CREATE_POST);
 
 // Forum actions End -----------------------
