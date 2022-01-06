@@ -88,7 +88,7 @@ const Home = () => (
               src="https://via.placeholder.com/150"
               className="avatar-image mr-2"
             ></img>
-            <span className="avatar-title">Filip Jerga</span>
+            <span className="avatar-title">Name Surname</span>
           </div>
         </a>
         <a
@@ -108,7 +108,7 @@ const Home = () => (
               src="https://via.placeholder.com/150"
               className="avatar-image mr-2"
             ></img>
-            <span className="avatar-title">Filip Jerga</span>
+            <span className="avatar-title">Name Surname</span>
           </div>
         </a>
         <a
@@ -128,7 +128,7 @@ const Home = () => (
               src="https://via.placeholder.com/150"
               className="avatar-image mr-2"
             ></img>
-            <span className="avatar-title">Filip Jerga</span>
+            <span className="avatar-title">Name Surname</span>
           </div>
         </a>
       </div>

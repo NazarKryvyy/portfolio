@@ -34,7 +34,7 @@ const AppNavBar = () => {
     <div className="navbar-wrapper">
       <Navbar expand="lg" className="navbar-dark fj-mw9">
         <AppLink href="/" className="navbar-brand mr-3 font-weight-bold">
-          FilipJerga
+          Home
         </AppLink>
         <Navbar.Toggle />
         <Navbar.Collapse>
